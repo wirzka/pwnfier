@@ -19,9 +19,9 @@ This is how the script gears run:
 
 * Python version: `3.7`
 * [HIBP](https://haveibeenpwned.com) API KEY for authenticated requests
-* [AbusedIpDB](https://github.com/vsecades/AbuseIpDb) by [Vsecades](https://github.com/vsecades)
 * [Docopt](http://docopt.org/) as command-line interface description language
 * [Art](https://github.com/sepandhaghighi/art) for the ASCII art
+
 ### How to use it
 Once you satisfy all the prerequisites, just launch it and let him do the magic.
 
