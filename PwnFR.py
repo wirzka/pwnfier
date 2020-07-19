@@ -10,42 +10,45 @@ class PwnFR(object):
     def __init__(self, api_key=None):
         self._api_key = api_key
 
-    def __getattr__(self, name):
-        raise NotImplementedError('{} not available in APIv3'.format(name))
+    # def __getattr__(self, name):
+    #     raise NotImplementedError('{} not available in APIv3'.format(name))
 
     def _get_response(self, service, parameter=''):
         BASE_URL = 'https://haveibeenpwned.com/api/v3/{service}{parameter}'
         VALID_SERVICES = (
             'breachedaccount',
             'breaches',
-            'breach',
+            'breach/',
             'dataclasses',
-            'pasteaccount',
+            'pasteaccount/',
         )
 
         if service not in VALID_SERVICES:
             msg = 'Unknown service "{}"'
             raise NotImplementedError(msg.format(service))
         headers = {'hibp-api-key': self._api_key, 'Accept': 'application/json', 'user-agent': 'pwnfier.py'}
-        response = requests.request(
-            method='GET',
-            url=BASE_URL.format(service=service, parameter=parameter),
+        response = requests.get(BASE_URL.format(service=service, parameter=parameter), verify=True,
             headers=headers)
         if response.status_code == 401:
             raise ValueError('Unauthorised — the API key provided was not valid. API key:\n')
         elif response.status_code in (422, 429):
             return response.json()['errors']
+        elif response.status_code == 404:
+            return 0
         response.raise_for_status()
-        return response.json()['data']
+        return response.json()
 
     def breachedaccount(self, account):
         return self._get_response('breachedaccount', account)
 
     def breaches(self, filter=None):
-        return self._get_response('breaches', '?domain='+filter)
+        if filter:
+            return self._get_response('breaches', '?domain={}'.format(filter))
+        else:
+            return self._get_response('breaches')
 
     def breach(self, website=None):
-        return self._get_response('breach', website)
+        return self._get_response('breach/', website)
    
     # def dataclasses():
     #     return self._get_response('dataclasses')
