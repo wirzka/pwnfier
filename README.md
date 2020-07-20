@@ -9,9 +9,9 @@ Python command line tool to look for:
 
 ### How it works
 This is how the script gears run:
-1. The script take the args parsed from the command line
-2. Check if the user has provided an authenticated request or not
-3. Check if the user has provided a file as input & check if the file is good
+1. The script takes the args parsed from the command line
+2. Checks if the user has provided an authenticated request or not
+3. Checks if the user has provided the argument or a file as input & check if the file is good
 4. Launch the query to HIBP with the API
 5. Shows the results
 
