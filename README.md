@@ -50,6 +50,18 @@ Options:
   pwnfier.py -nBF yahoo.com
   pwnfier.py -nb  Adobe
 ```
+### File's format
+The file that the user wants to pass must be formatted as the following:
+| Data        | File extension   | Format  |
+| ------------- |:-------------:| ------:|
+| Domains          | .txt  | OEPL |
+| Names | .txt  | OEPL  |
+| Passwords | .txt  | OEPL |
+| E-Mails | .txt      | AYW |
+
+*OEPL: One Entry Per Line*
+
+*AYW: As You Want, the script will grab every regex matching e-mail*
 
 ## Purpose of this tool
 Monitoring the confidentiality of any account.
