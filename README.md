@@ -1,3 +1,11 @@
+```
+                           _____ .__
+______  __  _  __  ____  _/ ____\|__|  ____  _______ 
+\____ \ \ \/ \/ / /    \ \   __\ |  |_/ __ \ \_  __ \
+|  |_> > \     / |   |  \ |  |   |  |\  ___/  |  | \/
+|   __/   \/\_/  |___|  / |__|   |__| \___  > |__|   
+|__|                  \/                  \/
+```
 # PwnFier
 
 Python command line tool to look for:
@@ -7,6 +15,8 @@ Python command line tool to look for:
 * All pastes for an account
 * Pwned passwords
 
+
+*For more detail, please go to [HIBP API overview](https://haveibeenpwned.com/API/v3)*
 ### How it works
 This is how the script gears run:
 1. The script takes the args parsed from the command line
@@ -25,8 +35,9 @@ This is how the script gears run:
 ### How to use it
 ```
 Usage:
-  pwnfier.py  (-a) (([-A MAIL] | [-P MAIL]) [-f FILEPATH])
-  pwnfier.py  (-n) (([-b NAME] | [-B] [--filter DOMAIN] | [-p PASSWORD]) [-f FILEPATH])
+  pwnfier.py  (-a) (([-A MAIL] | [-P MAIL]) [-f FILEPATH] [-S])
+  pwnfier.py  (-n) (([-b NAME] | [-B] [--filter DOMAIN]) [-f FILEPATH] [-S])
+  pwnfier.py  (-n) (-p PASSWORD [-f FILEPATH] [-H] [-S])
   pwnfier.py  -h | --help
 
 Options:
@@ -39,12 +50,16 @@ Options:
   
   Type of query:
   -b --breach        Give a domain, look for its specific breaches
-  -B --breaches      Retrieve all breaches from HIBP
-  -p --passwd        Check for password
+  -B --breaches      Retrieve all breaches from HIBP (filter with -F)
+  -p --passwd        Check for password's leak
   -P --Pasted        Check if the given mail is on Pasted websites
-  -A --AllBreach     Check all the given mail's breached accounts
+  -A --AllBreach     Check all the given mail's breaches
+  -H --hash          If you want to give only directly the password's hash
+
+  Misc:
+  -S --save          Save the output to standard file
   -h --help          Show this screen
-  
+
   Some examples:
   pwnfier.py -aAf mailFile.txt
   pwnfier.py -nBF yahoo.com
@@ -54,6 +69,7 @@ Options:
 The file that the user wants to pass must be formatted as the following:
 | Data        | File extension   | Format  |
 | ------------- |:-------------:| ------:|
+| API          | .txt  | 1 LINE |
 | Domains          | .txt  | OEPL |
 | Names | .txt  | OEPL  |
 | Passwords | .txt  | OEPL |
@@ -62,10 +78,26 @@ The file that the user wants to pass must be formatted as the following:
 *OEPL: One Entry Per Line*
 
 *AYW: As You Want, the script will grab every regex matching e-mail*
+### Standard ouput file
+At the beginning of the code, you can find the variables to set to choose the output file's name and path.
+The extension is JSON.
+The default path is the current working directory.
+
+Default names are:
+| Type of query        | File extension |
+| ------------- |:-------------:| 
+| All breaches          | pwnfier_account.json |
+| Pastes          | pwnfier_pasted.json |
+| Single breach | pwnfier_breach_res.json |
+| All breaches | pwnfier_breaches_res.json |
+| Pwned passwords | pwnfier_pwd_res.json |
+
+#### The *all breaches* query if not filtered will automatically save the output to file.
 
 ## Purpose of this tool
 Monitoring the confidentiality of any account.
-I've created this tool just for educational purpose.
+I've created it just for educational purpose and I am not a professional dev.
+
 Feel free to show me better way to do it.
 
 ## Authors
