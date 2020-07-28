@@ -98,7 +98,7 @@ Default names are:
 Monitoring the confidentiality of any account.
 I've created it just for educational purpose and I am not a professional dev.
 
-Feel free to show me better way to do it.
+Feel free to show me better ways to do it.
 
 ## Authors
 
